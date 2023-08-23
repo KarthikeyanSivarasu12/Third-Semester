@@ -398,7 +398,7 @@ public class Main{
            System.out.println(t);
            //  [-8 5 7 9] 
 
-           //To create from a given set 
+           //To create a set from a given set //learn
            given w is existing already
            Set<Integer> t=new HashSet<Integer>(w);
 
