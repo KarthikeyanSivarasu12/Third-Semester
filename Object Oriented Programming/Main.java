@@ -28,7 +28,7 @@
         
         //always for character we can use single quotes and only have one character
         //Non-primitive data types
-        String str="9";//here 9 is a string not a character
+        String str="9";//here 9 is a string not a character.Also note that we use capital S for String
         String str2="725tim";
         System.out.println(hello_world);
         System.out.println(str1);
@@ -97,6 +97,8 @@
 
         String scanned=sc.next();
         //the string is stored in scanned variable after getting scanned from the scanner object
+        //sc.nextLine gets the next line of string from the scanner object
+
 
     
         //sc.next() gets the next stream of characters from the scanner object
@@ -165,7 +167,7 @@
 
 
     Scanner sc=new Scanner(System.in);
-    String a=sc.next();
+    String s=sc.next();
     if(s.equals("Tim"))
     {
         System.out.print("You typed tim");
@@ -209,6 +211,252 @@ public class Main {
         }
     }
 }
+
+
+//ARRAYS 
+//Array is a collection of similar data types of 
+//set size.
+
+import java.util.Scanner
+
+public class Main{
+    public static void main(String[] args)
+    {
+        int[] newArr1=new int[5];
+        String newArr=new String[2];//this set all elements to null but not initialise
+        
+        newArr[0]="Hello";
+        newArr[1]="Hi";
+        System.out.println(newArr[0]);
+
+        String x=newArr[0];
+        System.out.println(x);
+       
+        int[] nums={2,3,54,6,6};
+
+        int y=nums[4];
+        System.out.println(y);
+
+
+        //FOR LOOPS
+
+        int x=5;
+        int[] arr={1,5,7,3,4,5};
+        for(int i=0;i<=x;i+=x)
+        {
+            System.out.println(i);
+
+        }
+        int[] arr={1,5,7,3,4,5};
+        for(int i=0;i<arr.length;i+=x)
+        {
+            if(arr[i]==5)
+            {
+               System.out.println("Found a 5! at index"+i);
+               //here i will be automatically converted to string because
+                //we are using + operator
+
+            }
+        
+        }
+
+        //FOR EACH LOOP
+        //used to loop through list of elements or array
+
+        int[] arr={1,3,5,7};
+        String[]arr2= new String[5];
+        int count=0;
+
+        for(int element:arr)
+        {
+            System.out.println(element+" "+" is at index "+count);
+            count++;
+        }
+        //here we dont need to give the length of the array
+        //we can use for each loop when we to iterate through the array.
+        //the loop starts from index 0 and goes till the end of the array
+
+        //Adding elements to an array using for loop
+
+        String[] names=new String[5];
+        Scanner sc=new Scanner(System.in);
+        for(int i=0;i<5;i++)
+        {  
+            System.out.println("Enter a string");
+           String input=sc.nextLine();
+           names[i]=input;
+
+
+        }
+
+        //TO print out the inputted string array
+
+        for(String element:names)
+        {
+            System.out.println(element);
+        }
+
+        for(String element1:names)
+        {
+            System.out.println(element1);
+            if(element1.equals("Tim"))
+            {
+                break;
+            }
+        }
+
+
+        //WHILE LOOPS
+
+        public class Main{
+            public static void main(String[] args)
+            {
+                Scanner sc=new Scanner(System.in);
+                System.out.print("Type a number");
+                int x=sc.nextInt();
+                int count=0;
+                while(x!=10)
+                {       
+                        System.out.println("Type 10");
+                        System.out.print("Type a number");
+                        int x=sc.nextInt();
+                        count++;
+                }
+                System.out.println("You Tried"+" "+count+"Times");
+
+
+
+                //DO WHILE LOOP
+                
+                int x;
+                do
+                {
+                    System.out.print("Type a number");
+                      x=sc.nextInt();
+                }while(x!=10);
+
+            }
+
+
+            //SETS AND LISTS
+            //they are called collection interface
+            //they are used to store multiple values in a single variable
+            //they are used when we are not sure of array length
+            //SETS
+
+            //set is prefereed to check if it exists 
+
+            
+            //sets are used to store unique values
+            //sets are unordered
+            //sets are not indexed
+            //sets are not sorted
+            
+
+            import java.util.Set//capital s
+            import java.util.Hashset//capital h and s 
+           
+           Set<Integer> t=new HashSet<Integer>();//name of set is t
+              //here we are creating a set of integers
+
+           t.add(5);
+           t.add(7);
+           t.add(5);//does not add to set
+           t.add(9);
+           t.add(-8);
+
+           //its not stored in the above order necessarily 
+           System.out.println(t);
+
+           //
+           boolean x=t.contains(5);
+           System.out.println(boolean);
+
+           //To remove 
+
+           t.remove(9);
+           System.out.println(t);
+
+           //To clear
+           t.clear();
+
+           t.isEmpty();
+           int a=t.size();
+
+           //HashSet is a standard set 
+           //There is Treeset,LInkedHashSet
+           import java.util.TreeSet;
+           import java.util.LinkedHashSet;
+
+           Set<Integer> t=new TreeSet<Integer>();
+           //in tree set elements are stored in order without index.
+            t.add(5);
+           t.add(7);
+           t.add(5);//does not add to set
+           t.add(9);
+           t.add(-8);
+           System.out.println(t);
+           //  [-8 5 7 9] 
+
+           //To create from a given set 
+           given w is existing already
+           Set<Integer> t=new HashSet<Integer>(w);
+
+           //LISTS
+           import java.util.ArrayList;
+
+           ArrayList<Integer> t=new ArrayList<Integer>();
+           //List is  slower
+           //we can index position in list
+           t.add(1);//position 0
+           t.add(2);//position 1
+           t.get(0);//used to get the element in 0th index of the list
+           t.set(1,5);//to use t.set already elements must exist till index
+           System.out.println(t);
+
+           // answer is 1,5
+           int a=t.size();
+           //we can use t.empty
+
+           t.subList(1,3);//used to get the sublist from a list between the range
+           //a,b-1 for a,b .So here from 1-2.Provided elements exist already in the 
+           // given index
+
+           System.out.println(t.subList(1,3));
+
+           //we also have LinkedLIst
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+ 
+
 
 
 
