@@ -408,8 +408,8 @@ public class Main{
            ArrayList<Integer> t=new ArrayList<Integer>();
            //List is  slower
            //we can index position in list
-           t.add(1);//position 0
-           t.add(2);//position 1
+           t.add(1);//position 0 ,1 is the element
+           t.add(2);//position 1,2 is the element
            t.get(0);//used to get the element in 0th index of the list
            t.set(1,5);//to use t.set already elements must exist till index
            System.out.println(t);
@@ -426,8 +426,54 @@ public class Main{
 
            //we also have LinkedLIst
 
+           
+          //HASHMAPS and MAPS
+          //TREEMAP
+          //LINKEDHASHMAP
+          //Maps is known as  key value pairs
+
+            import java.util.HashMap;
+            import java.util.Map;
+            import java.util.TreeMap;
+
+            Map m=new HashMap();
+            //here m is the object of the class HashMap
+            //HashMap is a class in java.util package
+            //HashMap is a standard map
+            //HashMap is unordered
+            //HashMap is not sorted
+            //HashMap is not indexed
+            //HashMap is not synchronized
+            //HashMap does not allow duplicate keys
+            //maps have unique key values
+
+            //we can idex by keys
+            //keys can be string ,no,char,float
+            //the key links to a value
+
+            m.put("Tim".5);//key,value
+            System.out.println(m);
+
+            // {Tim=5} is the answer
+
+            System.out.println(m.get("Tim"));//gets the value of key Tim
+
+            //map is extremely fast
+
+            m.put("Toe"."x");
+            m.put(11,999);
+
+            //hashmaps does not retain an order
+
+            Map 
+            
 
 
+
+
+
+
+            
 
             
 
