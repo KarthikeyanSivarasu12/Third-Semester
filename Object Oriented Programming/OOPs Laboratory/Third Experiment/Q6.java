@@ -1,33 +1,31 @@
 // For the given integer just print the sum of all even digits and odd digits separately. 
-     Eg:  Input : 1234
-     Output  : 6 ( Sum of even numbers)
-      4 (Sum of odd numbers)
+//    Eg:  Input : 1234
+//     Output  : 6 ( Sum of even numbers)
+//     4 (Sum of odd numbers)
 
-public class Q6
-{
-    public static void main(String[] args)
-    {
-        Scanner sc=new Scanner(System.in);
-        String a=sc.nextLine();
-        int sumeven;
-        int sumodd;
+import java.util.Scanner;
 
+public class Q6_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int b = sc.nextInt();
+        int sumodd = 0;
+        int sumeven = 0;
 
-        for(int i=0;i<a.length();i++)
-        {
-            if((parseInt(a[i]))%2==0)
-            {
-                sumeven+=parseInt(a[i]);
+        String elementString = String.valueOf(b);
+        String[] c = elementString.split("");
+        int i = 0;
 
-            }
-            else
-            {
-                sumodd+=parseInt(a[i]);
+        for (String element : c) {
+            int d = Integer.parseInt(element);
+            if (d % 2 == 0) {
+                sumeven += d;
+            } else {
+                sumodd += d;
             }
         }
-        System.out.println("Sum of odd numbers:"+" "+sumodd);
-        System.out.println("Sum of even numbers:"+" "+sumeven);
-
-
-    }  
+        System.out.println("Sum of odd digits: " + sumodd);
+        System.out.println("Sum of even digits: " + sumeven);
+    }
 }
+
