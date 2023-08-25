@@ -3,36 +3,31 @@
      Output  : 6 ( Sum of even numbers)
       4 (Sum of odd numbers)
 
-    import java.util.Scanner;
-    public class Q6 {
+public class Q6
+{
     public static void main(String[] args)
     {
-         Scanner sc=new Scanner(System.in);
-         Arraylist<Integer> l=new ArrayList<Integer>();
+        Scanner sc=new Scanner(System.in);
+        String a=sc.nextLine();
+        int sumeven;
+        int sumodd;
 
-    
-         A
-         int sumodd=0;
-         int sumeven=0;
 
-         for(int i=0;i<a.length();i++)
-         {  
-
-            char c=sc.nextChar()
-            int b=parseInt()
-
-            if(a[i]%2==0)
+        for(int i=0;i<a.length();i++)
+        {
+            if((parseInt(a[i]))%2==0)
             {
-                 sumeven+=i;
-            }
-            else{
-                sumodd+=i;
-            }
-         }
+                sumeven+=parseInt(a[i]);
 
-         System.out.println("Sum of even numbers:"+" "+sumeven);
-         System.out.println("Sum of odd numbers:"+" "+sumodd);
+            }
+            else
+            {
+                sumodd+=parseInt(a[i]);
+            }
+        }
+        System.out.println("Sum of odd numbers:"+" "+sumodd);
+        System.out.println("Sum of even numbers:"+" "+sumeven);
 
-    }
+
+    }  
 }
-  
