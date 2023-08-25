@@ -1,6 +1,5 @@
 // Find greatest of Two numbers [ if,else]
-package
-
+package OOPs laboratory.third experiment;
 import java.util.Scanner;
 
 public class Q1
@@ -9,8 +8,8 @@ public class Q1
     {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter the First Number:");
-        System.out.println("Enter the Second Number:");
         int x=sc.nextInt();
+        System.out.println("Enter the Second Number:");
         int y=sc.nextInt();
 
         if(x>y)
