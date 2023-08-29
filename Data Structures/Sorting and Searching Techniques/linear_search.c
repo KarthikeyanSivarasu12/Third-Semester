@@ -1,48 +1,48 @@
-// #include <stdio.h>
-// #include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// int linear_search(int *arr, int length, int n) {
-//     for (int i = 0; i < length; i++) {
-//         if (arr[i] == n) {
-//             printf("Found\n");
-//             return 0;
-//         }
-//     }
-//     printf("Not found\n");
-//     return 1;
-// }
+int linear_search(int *arr, int length, int n) {
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == n) {
+            printf("Found\n");
+            return 0;
+        }
+    }
+    printf("Not found\n");
+    return 1;
+}
 
-// void input_array(int *arr1, int length) {
-//     for (int k = 0; k < length; k++) {
-//         printf("Enter the %dth element: ", k + 1);
-//         scanf("%d", &arr1[k]);
-//     }
-// }
+void input_array(int *arr1, int length) {
+    for (int k = 0; k < length; k++) {
+        printf("Enter the %dth element: ", k + 1);
+        scanf("%d", &arr1[k]);
+    }
+}
 
-// int main(void) {
-//     int m, n;
+int main(void) {
+    int m, n;
 
-//     printf("Enter the size of the array: ");
-//     scanf("%d", &m);
+    printf("Enter the size of the array: ");
+    scanf("%d", &m);
 
-//     int *p = (int *)malloc(m * sizeof(int));
+    int *p = (int *)malloc(m * sizeof(int));
 
-//     if (p == NULL) {
-//         printf("Memory allocation failed.\n");
-//         return 1;
-//     }
+    if (p == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
-//     input_array(p, m);
+    input_array(p, m);
 
-//     printf("Enter the number to be searched in the array: ");
-//     scanf("%d", &n);
+    printf("Enter the number to be searched in the array: ");
+    scanf("%d", &n);
 
-//     linear_search(p, m, n);
+    linear_search(p, m, n);
 
-//     free(p);
+    free(p);
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 
