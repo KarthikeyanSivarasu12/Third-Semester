@@ -41,3 +41,23 @@
 // &&, ||, !
 //these are used to combine two or more conditions.That is to compare two or more relational operators
 
+//ARRAYS
+//Multidemisional arrays in java
+//multidimesional arrays are arrays of arrays
+//data is stored in row and column format(ie a tabular format)and in row major order
+
+// int [][] a=new int[3][3];
+// int [][] a={{1,2,3},{4,5,6},{7,8,9}};
+//for 3d arrays
+// int [][][] a=new int[3][3][3];
+// int [][][] a={{{1,2,3},{4,5,6},{7,8,9}},{{10,11,12},{13,14,15},{16,17,18}},{{19,20,21},{22,23,24},{25,26,27}}};
+
+//int [][]x=new int[3][3];
+//this array can store 3 rows and 3 columns
+
+
+//we use reduction framework to reduce the number of loops in a program and also grow the size of the array
+//in order to overcome the limitations of arrays we use arraylist
+
+
+

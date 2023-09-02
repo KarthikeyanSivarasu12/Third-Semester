@@ -14,7 +14,7 @@
 // y:2
 
 
-public class Main {
+public class Q1 {
     public static void main(String[] args) {
         int y = 20;
 
