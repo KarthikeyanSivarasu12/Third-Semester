@@ -9,36 +9,44 @@
 // Enter the position where you want to insert element : 2
 // Enter the element you want to insert : 60
 // After inserting : 10 60 20 30 40 50
-
-package OOPs Laboratory.Fifth Experiment;
+import java.util.Scanner;
 
 public class Q5 {
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-          System.out.println("Enter the number off elements in the array");
-          int n=sc.nextInt();
-          int sum=0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in the array");
+        int n = sc.nextInt();
 
-          int[] arr=new int[n];
-          for(int i=0;i<arr.length;i++)
-          {
-               System.out.println("Enter the element at index "+i);
-               arr[i]=sc.nextInt();
-          }
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println("Enter the element at index " + i);
+            arr[i] = sc.nextInt();
+        }
 
-          System.out.println("Enter the position you want to insert the elment:");
-          int a=sc.nextInt();
-          System.out.println("Enter the element to be inserted:");
-          int b=sc.nextInt();
+        System.out.println("Enter the index you want to insert the element:");
+        int a = sc.nextInt();
+        if (a < 0 || a > n) {
+            System.out.println("Invalid index. Index should be between 0 and " + n);
+            return; // Exit the program if the index is invalid
+        }
 
-          for(int i=0;i<n;i++)
-          {
-            
-          }
+        System.out.println("Enter the element:");
+        int b = sc.nextInt();
 
+        int[] newarr = new int[n + 1];
 
+        for (int j = 0, k = 0; j < n + 1; j++) {
+            if (j == a) {
+                newarr[j] = b;
+            } else {
+                newarr[j] = arr[k++];
+            }
+        }
 
-        
+        // Print the new array
+        System.out.println("New Array:");
+        for (int i = 0; i < newarr.length; i++) {
+            System.out.println("Element at index " + i + ": " + newarr[i]);
+        }
     }
-    
 }
