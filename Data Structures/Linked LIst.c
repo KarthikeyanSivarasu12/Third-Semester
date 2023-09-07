@@ -92,27 +92,3 @@ void display(struct node *start)
         p = p->next;
     }
 }
-
-
-//Create a node
-struct node
-{
-    int data;
-    struct node *next;
-};
-
-//Allocate memory for a node
-int main(void)
-{
-    struct node *p;
-    p=(struct node*)malloc(sizeof(struct node));
-    // p is a structure pointer variable which points to a structure of type
-    //struct node
-    //p returns the address of the dynamically allocated memory
-    //malloc is a function which takes the size of the structure as argument
-    //malloc returns the address of the dynamically allocated memory
-    //malloc returns a void pointer
-    //malloc returns a void pointer which is typecasted to struct node pointer
-    //so now p is a structure pointer variable which points to a structure of type
-    //struct node
-}
