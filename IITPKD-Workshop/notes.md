@@ -21,3 +21,22 @@ The async function declaration defines an asynchronous function, which returns a
 
 await is like asking a question. "Are you done yet?" If the answer is "yes", then you get the result. If the answer is "no", then you wait until the answer is "yes".
 
+NPM
+//npm is a package manager for node.js
+
+
+//REST API
+
+GET is  used to request data from a specified resource.That is receive
+POST is used to send data to a server to create/update a resource.That is send
+PUT is used to send data to a server to create/update a resource.That is send
+DELETE is used to delete a specified resource.That is send
+
+//JASON FILE
+
+//JSON is a syntax for storing and exchanging data.
+//JSON is text, written with JavaScript object notation.
+//JSON is a lightweight data-interchange format.
+//JSON is language independent *
+//JSON is "self-describing" and easy to understand
+
