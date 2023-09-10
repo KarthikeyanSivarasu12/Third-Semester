@@ -40,3 +40,11 @@ DELETE is used to delete a specified resource.That is send
 //JSON is language independent *
 //JSON is "self-describing" and easy to understand
 
+//SOCKET
+
+//refer sockets.io
+//USE THE RESOURCES
+
+9949297395-Syed Abdul mateen
+SyedMa3-Github
+

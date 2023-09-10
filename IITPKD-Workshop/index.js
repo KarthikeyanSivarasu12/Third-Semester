@@ -11,7 +11,7 @@ const express=require(express);//whatever function is
 const app=express();//app is an object of express
 //app is a server
 
-const port=3000;//port is a variable
+const port=3002;//port is a variable
 //port is a number
 
 
@@ -26,22 +26,4 @@ var student=[10];
 
 
 app.listen(port,func);//listen is a function.
-
-const express=require('express')
-const app=express();
-const port=3000;
-
-app.get('/local',(req,res)=>{
-    res.send('Hello World!');
-}
-);
-app.get('/about',(req,res)=>{
-    res.send('About us');
-}
-);
-
-app.listen(port,()=>{
-    console.log('server is listening at port 3000');
-}
-);
 
