@@ -140,3 +140,37 @@ public class Lecture1
     //this creates a new datatype called student which contains 3 properties
     //rollno,name,marks
     
+
+
+
+
+
+
+// public class Main
+// {
+// 	public static void main(String[] args) {
+	
+	
+// 	   Student kunal=new Student();
+// 	   System.out.println(kunal);
+	   
+// 	   kunal.greeting();
+// 	}
+// }
+
+// class Student
+// {
+//     int rollno;
+//     String name;
+//     float marks;
+    
+//     void changename(String newname)
+//     {
+//         name=newname;
+//     }
+    
+//     void greeting()
+//     {
+//         System.out.println("S"+" "+this.name);
+//     }
+// }
