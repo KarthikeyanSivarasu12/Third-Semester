@@ -28,6 +28,7 @@ void display(struct node *start)
     temp=start;
     while(p!=NULL)
     {
+        
         p=p->next;
     }
 }
