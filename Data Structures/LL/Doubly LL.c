@@ -1,3 +1,0 @@
-//DOUBLY LINKED LIST
-
-#in
