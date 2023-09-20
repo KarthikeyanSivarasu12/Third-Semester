@@ -1,5 +1,3 @@
-//DOUBLY LINKED LIST
-
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -13,25 +11,33 @@ struct node
 struct node *getnode(int data)
 {
     struct node *start;
-    start=(struct node *)malloc(sizeof(struct node));
-    start->data=data;
-    start->next=NULL;
-    start->previous=NULL;
+    start = (struct node *)malloc(sizeof(struct node));
+    start->data = data;
+    start->next = NULL;
+    start->previous = NULL;
     return start;
-
 }
 
 void display(struct node *start)
 {
-    struct node *p;
-    p = start;
-    while (p != NULL)
+    if (start == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct node *p = start;
+    do
     {
         printf("Data: %d, Next: %p, Previous: %p\n", p->data, p->next, p->previous);
         p = p->next;
-    }
+    } while (p != start);
+
+    // Handle the circular linkage for the first and last elements
+    printf("Data at the first node: %d, Next: %p, Previous: %p\n", start->data, start->next, start->previous);
+    printf("Data at the last node: %d, Next: %p, Previous: %p\n", p->data, p->next, p->previous);
     printf("\n");
 }
+
 
 struct node *create_DLL(struct node *start, int n)
 {
@@ -57,17 +63,26 @@ struct node *create_DLL(struct node *start, int n)
             temp = newNode;
         }
     }
+
+    if (n > 1) {
+        newNode->next = start;
+        start->previous = newNode;
+    }
+    else if (n == 1) {
+        start->next = start;
+        start->previous = start;
+    }
+
     return start;
 }
 
-
 int main(void)
 {
-    struct node *start;
+    struct node *start = NULL;
     int n;
-    printf("Enter the number of nodes");
-    scanf("%d",&n);
-    start=create_DLL(start,n);
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    start = create_DLL(start, n);
     display(start);
     return 0;
 }
