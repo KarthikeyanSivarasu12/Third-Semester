@@ -86,3 +86,80 @@ int main(void)
     display(start);
     return 0;
 }
+
+
+// /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* deleteMiddle(struct ListNode* head)
+{
+    struct ListNode *b;
+    b=head;
+    int z,middle;
+    z=nodecount(head);
+    if(z==1)
+    {
+       middle=0;
+       b=getnode_atx(head,0);
+       free(b);
+    }
+    else
+    {
+        
+    }
+
+}
+
+struct ListNode *getnode_atx(struct ListNode *start,int x)
+{
+    struct ListNode *p;
+    p=start;
+    if(x==0)
+    {
+        return p;
+    }
+    for(int i=0;i<x-1;i++)
+    {
+        if(x>1)
+        {
+        p=p->next;
+        }
+        else
+        {
+            
+            break;
+        }
+
+    }
+    return p;
+
+}
+
+int nodecount(struct ListNode *start)
+{
+    struct ListNode *a;
+    a=start;
+    int nodecount=1;
+     if(p==NULL)
+    {
+        nodecount=0;
+    }
+    else
+    {
+     while((p->next)!=NULL)
+     { 
+       
+        int nodecount++;
+        p=p->next;
+
+    }
+    }
+
+    return nodecount;
+
+
+}
