@@ -141,28 +141,26 @@ int nodecount(struct node *start)
 
 //INSERT N NODES BEFORE NODE X IN A DOUBLY LINKED LIST 
 
-struct node *getnode_atx(struct node *start,int x)
+struct node *getnode_atx(struct node *start, int x)
 {
     struct node *p;
-    p=start;
+    p = start;
     int count;
-    count=nodecount(start);
-    if(count<x)
+    count = nodecount(start);
+
+    if (count < x || x <= 0)
     {
         printf("The node does not exist\n");
-        return start;
+        return NULL; // Return NULL to indicate that the requested node doesn't exist
     }
     else
     {
-        for(int i=0;i<x;i++)
+        for (int i = 1; i < x; i++) // Start the loop at 1
         {
-            p=p->next;
+            p = p->next;
         }
         return p;
     }
-
-
-    
 }
 
 struct node *insert_nbeforex(struct node *start,int x,int n)
