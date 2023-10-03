@@ -252,7 +252,7 @@
 // }
 
 
-// //INSERT N NODES AT THE END 
+// //INSERT N NODES AT THE END
 
 // #include<stdio.h>
 // #include<stdlib.h>
@@ -342,7 +342,7 @@
 // #include<stdio.h>
 // #include<stdlib.h>
 
-// //CREATE A NODE 
+// //CREATE A NODE
 // struct node
 // {
 //     int data;
@@ -788,7 +788,7 @@
 // #include<stdio.h>
 // #include<stdlib.h>
 
-// //CREATE A NODE 
+// //CREATE A NODE
 
 
 // struct node

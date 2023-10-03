@@ -102,6 +102,7 @@
 
     
         //sc.next() gets the next stream of characters from the scanner object
+        //exactly one word
         //sc.next()gives us a string
         //sc.nextInt() gives us an integer
         //sc.nextDouble() gives us a double

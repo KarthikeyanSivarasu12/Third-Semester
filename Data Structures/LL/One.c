@@ -1,11 +1,11 @@
-//LINKED LIST
+//SINGLY LINKED LIST
 
-//ONE 
+//ONE
 
 #include<stdio.h>
 #include<stdlib.h>
 
-//CREATE A NODE 
+//CREATE A NODE
 struct node
 {
     int data;
