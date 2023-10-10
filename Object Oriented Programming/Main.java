@@ -121,7 +121,7 @@
         boolean a=sc2.nextBoolean();//only true or false(ie lowercase)
         System.out.println(a);
 
-        Scaanner sc4=new Scanner(System.in);
+        Scanner sc4=new Scanner(System.in);
         double b=sc4.nextDouble();
         system.out.println(b);//altough you give int as ip it converts to double
 
@@ -158,7 +158,7 @@
     //for numbers
     // && is the and operator,|| is the or operator
 
-    Scanner sc=new Scanner(Scanner.in);
+    Scanner sc=new Scanner(System.in);
     String s=sc.next();
     s.equals("Hello");// compare s with hello
 
@@ -172,14 +172,14 @@
     if(s.equals("Tim"))
     {
         System.out.print("You typed tim");
-    } 
+    }
     else if(s.equals("Hello"))
     {
            System.out.print("You  typed Hello");
     }
     else
     {
-        System.out.print("You dindt type tim");
+        System.out.print("You dindt type tim or hello");
     }
 
     //elif and if can exist without else
@@ -214,8 +214,8 @@ public class Main {
 }
 
 
-//ARRAYS 
-//Array is a collection of similar data types of 
+//ARRAYS
+//Array is a collection of similar data types of
 //set size.
 
 import java.util.Scanner
@@ -225,6 +225,11 @@ public class Main{
     {
         int[] newArr1=new int[5];
         String newArr=new String[2];//this set all elements to null but not initialise
+
+        String[] newArr3={"Hello","Hi"};//this is initialising
+        int[] newArr2={1,2,3,4,5};//this is initialising an integer array
+        String[] newArr4=new String[2];//this is declaring
+        
         
         newArr[0]="Hello";
         newArr[1]="Hi";
@@ -233,10 +238,10 @@ public class Main{
         String x=newArr[0];
         System.out.println(x);
        
-        int[] nums={2,3,54,6,6};
+        int[] nums={2,3,54,6,8};
 
         int y=nums[4];
-        System.out.println(y);
+        System.out.println(y);//this prints 8
 
 
         //FOR LOOPS
@@ -256,6 +261,7 @@ public class Main{
                System.out.println("Found a 5! at index"+i);
                //here i will be automatically converted to string because
                 //we are using + operator
+                
 
             }
         
@@ -317,7 +323,7 @@ public class Main{
                 int x=sc.nextInt();
                 int count=0;
                 while(x!=10)
-                {       
+                {
                         System.out.println("Type 10");
                         System.out.print("Type a number");
                         int x=sc.nextInt();
