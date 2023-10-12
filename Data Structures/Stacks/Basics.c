@@ -126,3 +126,5 @@ int main(void) {
     free(arr);
     return 0;
 }
+
+//INFIX TO POSTFIX CONVERSION(90 PERCENT SEMESTER LAB EXAM QUESTION)
