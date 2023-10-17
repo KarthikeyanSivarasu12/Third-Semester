@@ -1,111 +1,119 @@
-//IMPLEMENTATION OF STACKS USING ARRAYS
+// //IMPLEMENTATION OF STACKS USING ARRAYS
 
-#include<stdio.h>
-#include<stdlib.h>
+// #include<stdio.h>
+// #include<stdlib.h>
 
 
-int * push(int *array,int *top,int maxsize,int numberofelements,int data)
-{
-    if(*top==maxsize-1||numberofelements==maxsize)
-    {
-        printf("Stack overflow");
-        return top;
-    }
-    else
-    {
-        array[++(*top)]=data;
-        return top;
-    }
-}
+// int * push(int *array,int *top,int maxsize,int numberofelements,int data)
+// {
+//     if(*top==maxsize-1||numberofelements==maxsize)
+//     {
+//         printf("Stack overflow");
+//         return top;
+//     }
+//     else
+//     {
+//         array[++(*top)]=data;
+//         return top;
+//     }
+// }
 
-void display(int *array,int *top)
-{
-    for(int i=0;i<=*top;i++)
-    {
-        printf("%d",array[i]);
-    }
-}
+// void display(int *array,int *top)
+// {
+//     for(int i=0;i<=*top;i++)
+//     {
+//         printf("%d",array[i]);
+//     }
+// }
 
-int main(void)
-{
-    int Numberofelements,*Array,Data,Maxsize,Npushes,*Top;
-    Top=(int*)malloc(sizeof(int));
-    *Top=-1;
+// int main(void)
+// {
+//     int Numberofelements,*Array,Data,Maxsize,Npushes,*Top;
+//     Top=(int*)malloc(sizeof(int));
+//     *Top=-1;
     
-    printf("Enter the maximum size of the array:");
-    scanf("%d",&Maxsize);
-    Array=(int*)malloc(Maxsize*sizeof(int));
-    if(Array==NULL)
-    {
-        printf("Memory allocation failed");
-        return 1;
-    }
-    printf("Enter the number of elements to be inserted in array:");
-    scanf("%d",&Numberofelements);
+//     printf("Enter the maximum size of the array:");
+//     scanf("%d",&Maxsize);
+//     Array=(int*)malloc(Maxsize*sizeof(int));
+//     if(Array==NULL)
+//     {
+//         printf("Memory allocation failed");
+//         return 1;
+//     }
+//     printf("Enter the number of elements to be inserted in array:");
+//     scanf("%d",&Numberofelements);
 
-    for(int i=0;i<Numberofelements;i++)
-    {
-        printf("Enter the element at index %d",i);
-        scanf("%d",&Data);
-        Array[i]=Data;
-        *Top=*Top+1;
-    }
-    printf("Enter the number of pushes to be performed:");
-    scanf("%d",&Npushes);
-    while(Npushes+Numberofelements>Maxsize)
-    {
-        printf("Stack overflow");
-        printf("Enter a correct value:");
-        scanf("%d",&Npushes);
-    }
-    if(Npushes==0)
-    {
-        printf("No pushes to be performed\n");
-        display(Array,Top);
-        return 0;
-    }
-    else
-    {
+//     for(int i=0;i<Numberofelements;i++)
+//     {
+//         printf("Enter the element at index %d",i);
+//         scanf("%d",&Data);
+//         Array[i]=Data;
+//         *Top=*Top+1;
+//     }
+//     printf("Enter the number of pushes to be performed:");
+//     scanf("%d",&Npushes);
+//     while(Npushes+Numberofelements>Maxsize)
+//     {
+//         printf("Stack overflow");
+//         printf("Enter a correct value:");
+//         scanf("%d",&Npushes);
+//     }
+//     if(Npushes==0)
+//     {
+//         printf("No pushes to be performed\n");
+//         display(Array,Top);
+//         return 0;
+//     }
+//     else
+//     {
 
-    for(int j=0;j<Npushes;j++)
-    {
-          int DatatoPush;
-          printf("Enter the data to be pushed:");
-          scanf("%d",&DatatoPush);
-          Top=push(Array,Top,Maxsize,Numberofelements,DatatoPush);
+//     for(int j=0;j<Npushes;j++)
+//     {
+//           int DatatoPush;
+//           printf("Enter the data to be pushed:");
+//           scanf("%d",&DatatoPush);
+//           Top=push(Array,Top,Maxsize,Numberofelements,DatatoPush);
 
-    }
+//     }
 
-    if(*Top==-1)
-    {
-        printf("Stack underflow");
-        return 1;
-    }
-    else
-    {
-        display(Array,Top);
-    }
-    }
+//     if(*Top==Maxsize-1)
+//     {
+//         printf("Stack is full and the value of the top is Maxsize-1");
+//         return 1;
+//     }
+//     else if(*Top=-1)
+//     {
+//         printf("The stack is empty and the value of top is -1")
+//         return 1;
+//     }
+//     else
+//     {
+//         display(Array,Top);
+//     }
+//     }
     
-    free(Array);
-    free(Top);
-    return 0;
-}
+//     free(Array);
+//     free(Top);
+//     return 0;
+// }
 
 
 
 //POP OPERATION
+#include<stdio.h>
+#include<stdlib.h>
+
 
 int *pop(int *array,int *top,int maxsize,int numberofelements)
 {
-    if(*top==1)
+    if(*top==-1)
     {
         printf("Stack Underflow");
         return top;
     }
     else
     {
-       printf("The element popped is:%d",array[*top]);
+       printf("The element popped is:%d\n",array[*top]);
        *top=*top-1;
        return top;
     }
@@ -113,9 +121,10 @@ int *pop(int *array,int *top,int maxsize,int numberofelements)
 
 void display(int *array,int *top)
 {
+    printf("The resultant array after popping is:");
     for(int i=0;i<=*top;i++)
     {
-        printf("%d",array[i]);
+        printf(" %d ",array[i]);
     }
 }
 
@@ -139,12 +148,12 @@ int main(void)
 
     for(int i=0;i<Numberofelements;i++)
     {
-        printf("Enter the element at index %d",i);
+        printf("Enter the element at index:%d",i);
         scanf("%d",&Data);
         Array[i]=Data;
         *Top=*Top+1;
     }
-    printf("Enter the number of pushes to be performed:");
+    printf("Enter the number of pops to be performed:");
     scanf("%d",&Npops);
     while(Npops>Numberofelements)
     {
@@ -152,6 +161,7 @@ int main(void)
         printf("Enter a correct value:");
         scanf("%d",&Npops);
     }
+
     if(Npops==0)
     {
         printf("No pops to be performed\n");
@@ -162,6 +172,7 @@ int main(void)
     {
 
     for(int j=0;j<Npops;j++)
+    {
     
           Top=pop(Array,Top,Maxsize,Numberofelements);
 
@@ -169,16 +180,24 @@ int main(void)
 
     if(*Top==-1)
     {
-        printf("Stack underflow");
+        printf("The stack is empty and the value of top is -1");
+        
         return 1;
     }
-    else
+    else if(*Top==Maxsize-1)
     {
-        display(Array,Top);
+       printf("Stack is full and the value of the top is Maxsize-1");
+       return 1;
     }
+
+    display(Array,Top);
+    }
+   
     
     
     free(Array);
     free(Top);
     return 0;
 }
+
+
