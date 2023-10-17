@@ -14,7 +14,7 @@ void enqueue(int *array,int sizeofarray,int countofelemenets,int *front,int *rea
       return;
     }
 
-    else if(countofelemenets==sizeofarray||(*front==0&&*rear==sizeofarray-1)||*rear==(sizeofarray-1))
+    else if(countofelemenets==sizeofarray||(*front==0&&*rear==sizeofarray-1)||*front==*rear+1)
     {
         printf("Cannot insert more elements\n");
         return;
