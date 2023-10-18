@@ -23,13 +23,49 @@ abstract class Accounts
    String accountholdersname;
    String address;
    
-   abstract void withdrawal();
-   abstract void deposit();
+   abstract void withdrawal(double amount);
+   abstract void deposit(double amount);
 
    void display()
    {
       System.out.println("Balance is"+" "+accountholdersname);
    }
 }
+
+
+class SavingsAccount extends Accounts
+{
+   float rateofInterest;
+   void calculateAmount(float rateofInterest)
+   {
+      double amount=balance+(balance*rateofInterest/100);
+   }
+   void withdrawal(double amount)
+   {
+      double newbalance=balance-amount;
+      System.out.println("Withdrawal of amount"+" "+amount+" "+"is successful");
+   }
+   void deposit(double amount)
+   {
+      double newbalance=balance+amount;
+      System.out.println("Deposit of amount"+" "+amount+" "+"is successful");
+   }
+   
+
+}
+
+class Q1
+{
+   public static void main(String args[])
+   {
+      SavingsAccount s=new SavingsAccount();
+      s.withdrawal(1000);
+      s.deposit(1000);
+
+   }
+}
+
+
+
 
 
