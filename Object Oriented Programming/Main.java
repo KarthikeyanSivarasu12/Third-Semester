@@ -419,11 +419,13 @@ public class Main{
            t.add(2);//position 1,2 is the element
            t.get(0);//used to get the element in 0th index of the list
            t.set(1,5);//to use t.set already elements must exist till index
+           //t.set(1,5) means set 5 in the 1st index of the list
            System.out.println(t);
 
            // answer is 1,5
            int a=t.size();
            //we can use t.empty
+           //t.empty is true if the list is empty
 
            t.subList(1,3);//used to get the sublist from a list between the range
            //a,b-1 for a,b .So here from 1-2.Provided elements exist already in the 
