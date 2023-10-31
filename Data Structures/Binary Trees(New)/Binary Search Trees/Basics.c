@@ -167,56 +167,57 @@ struct node *insertnode(struct node *start, int value)
     }
     return rootnode;
 }
-void displaybinarysearchtree(struct node *start, int totalnodesinserted)
-{
-    struct node *rootnode, *parent;
-    int *array1, countofnodes, level;
-    countofnodes = totalnodesinserted;
-    rootnode = start;
-    parent = start;
-    array1 = (int *)malloc((2 * countofnodes) * sizeof(int));
-    if (array1 == NULL)
-    {
-        printf("No nodes inserted");
-    }
-    while (parent->lc != NULL && parent->rc != NULL)
-    {
-        level = 0;
-        if (countofnodes == 1)
-        {
-            printf("Level %d:%d", level, parent->data);
-        }
-        else
-        {
-            for (int i = 0; i < countofnodes; i++)
-            {
-                if (i == 0)
-                {
-                    array1[i] = parent->data;
-                    i++;
-                }
-                if ((parent->lc) != NULL || (parent->rc) != NULL)
-                {
-                    array1[i] = -1;
-                    level++;
+// void displaybinarysearchtree(struct node *start, int totalnodesinserted)
+// {
+//     struct node *rootnode, *parent;
+//     int *array1, countofnodes, level;
+//     countofnodes = totalnodesinserted;
+//     rootnode = start;
+//     parent = start;
+//     array1 = (int *)malloc((2 * countofnodes) * sizeof(int));
+//     if (array1 == NULL)
+//     {
+//         printf("No nodes inserted");
+//     }
+//     while (parent->lc != NULL && parent->rc != NULL)
+//     {
+//         level = 0;
+//         if (countofnodes == 1)
+//         {
+//             printf("Level %d:%d", level, parent->data);
+//         }
+//         else
+//         {
+//             for (int i = 0; i < countofnodes; i++)
+//             {
+//                 if (i == 0)
+//                 {
+//                     array1[i] = parent->data;
+//                     i++;
+//                 }
+//                 if ((parent->lc) != NULL || (parent->rc) != NULL)
+//                 {
+//                     array1[i] = -1;
+//                     level++;
 
-                    if ((parent->lc) == NULL)
-                    {
-                        parent = parent->rc;
-                    }
-                    else if ((parent->rc) == NULL)
-                    {
-                        parent = parent->lc;
-                    }
-                    else if ((parent->lc) != NULL && (parent->rc) != NULL)
-                    {
-                        printf("Level %d:%d %d", level, parent->lc->data, parent->rc->data);
-                    }
-                }
-            }
-        }
-    }
-}
+//                     if ((parent->lc) == NULL)
+//                     {
+//                         parent = parent->rc;
+//                     }
+//                     else if ((parent->rc) == NULL)
+//                     {
+//                         parent = parent->lc;
+//                     }
+//                     else if ((parent->lc) != NULL && (parent->rc) != NULL)
+//                     {
+//                         printf("Level %d:%d %d", level, parent->lc->data, parent->rc->data);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
 
 
 int main(void)
