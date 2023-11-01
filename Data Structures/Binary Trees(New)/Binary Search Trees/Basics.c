@@ -236,3 +236,82 @@ int main(void)
     displaybinarysearchtree(rootnodefinal,noofnodes);
     return 0;
 }
+
+
+//SEARCH FOR DATA IN THE BINARY TREE
+
+int search(int *tree,int data,int maxsizeofarray)
+{
+    
+    int iterable=0;
+    while(tree[iterable]!=data)
+    {
+        if(iterable==(maxsize-1))
+        {
+            printf("Data not found");
+            return -1;
+        }
+        if(tree[iterable]>data)
+        {
+            iterable=2*iterable+1;
+        }
+        else if(tree[iterable]<data)
+        {
+            iterable=2*iterable+2;
+        }
+    }
+
+    printf("The data is found at %d:",iterable);
+    return iterable;
+}
+
+
+void delete(int *tree,int data,)
+{
+    int index;
+    index=search(tree,data);
+    if(index==-1);
+    {
+        printf("Data to be deleted is not present in the tree");
+        return;
+    }
+    else if(tree[2*index+1]==-1 && tree[2*index+2]==-1)
+    {
+        printf("It is a leaf node");
+        tree[index]=-1;//deleting the node
+        return;
+
+    }
+}
+
+//SEARCH FOR DATA IN BINARY TREE USING LINKED LIST
+
+struct binarytree*search(struct binarytree*root,int data)
+{
+    struct binarytree*currentnode,*parentnode,*check;
+    currentnode=root;
+    parentnode=root;
+    check=root;
+    if(parentnode->leftchild!=NULL && parentnode->rightchild!=NULL)
+    {
+         if(parentnode->data>check->leftchild->data)
+         {
+            currentnode=currentnode->leftchild;
+         }
+         else if(parentnode->data<check->rightchild->data)
+         {
+            currentnode=currentnode->rightchild;
+         }
+    }
+    }
+    while(currentnode->dataofnode!=(data))
+    {
+        if(parentnode->data>currentnode->data)
+        {
+            parentnode=parentnode->leftchild;
+
+            return parent;
+        }
+        else
+    }
+
