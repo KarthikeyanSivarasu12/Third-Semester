@@ -315,3 +315,67 @@ struct binarytree*search(struct binarytree*root,int data)
         else
     }
 
+
+
+//CASE:1
+//DELETING A NODE WITH NO CHILDREN(LEAF NODE)
+
+void delete(struct node *root,int data)
+{
+    struct node *parentofnodetobedeleted,*delete;
+    parentofnodetobedeleted=search(root,data);
+    if(parentofnodetobedeleted->leftchild=NULL && parentofnodetobedeleted->rightchild=NULL || parentofnodetobedeleted=NULL)
+    {
+        printf("Node to be deleted not found in the tree");
+    }
+    else if (parentofnodetobedeleted->leftchild=NULL || parentofnodetobedeleted->rightchild=NULL )
+    {
+        if(parentofnodetobedeleted->leftchild=NULL)
+        {
+            if(parentofnodetobedeleted->rightchild==data)
+            {
+                if(parentofnodetobedeleted->rightchild->rightchild && parentofnodetobedeleted->rightchild->leftchild=NULL)
+                {
+                    parentofnodetobedeleted->rightchild==NULL;
+                    free(parentofnodetobedeleted->rightchild);
+                }
+            }
+        }
+        else if(parentofnodetobedeleted->rightchild=NULL)
+        {
+            if(parentofnodetobedeleted->leftchild==data)
+            {
+                if(parentofnodetobedeleted->leftchild->rightchild && parentofnodetobedeleted->leftchild->leftchild=NULL)
+                {
+                    parentofnodetobedeleted->leftchild==NULL;
+                    free(parentofnodetobedeleted->leftchild);
+                }
+            }
+        }
+    }
+    
+
+}
+
+
+//CASE 2
+//DELETE A NODE WITH ONE CHILDREN
+
+int delete1(struct node *root,int data)
+{
+    int checkresult;
+    struct node *node;
+    checkresult=check(root,data);
+    if(checkresult==1)
+    {
+        printf("It is a leaf node");
+        return 0;
+    }
+    else if(checkresult==0)
+    {
+         parentofnodetobedeleted=search(root,data);
+         if(parentofnodetobedeleted->leftchild=NULL && parentofnodetobedeleted->rightchild=NULL || parentofnodetobedeleted=NULL)
+    {
+    }
+
+}}
