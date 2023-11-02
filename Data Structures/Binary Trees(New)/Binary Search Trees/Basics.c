@@ -328,13 +328,13 @@ void delete(struct node *root,int data)
     {
         printf("Node to be deleted not found in the tree");
     }
-    else if (parentofnodetobedeleted->leftchild=NULL || parentofnodetobedeleted->rightchild=NULL )
+    else if (parentofnodetobedeleted->leftchild=NULL || parentofnodetobedeleted->rightchild==NULL )
     {
         if(parentofnodetobedeleted->leftchild=NULL)
         {
             if(parentofnodetobedeleted->rightchild==data)
             {
-                if(parentofnodetobedeleted->rightchild->rightchild && parentofnodetobedeleted->rightchild->leftchild=NULL)
+                if(parentofnodetobedeleted->rightchild->rightchild && parentofnodetobedeleted->rightchild->leftchild==NULL)
                 {
                     parentofnodetobedeleted->rightchild==NULL;
                     free(parentofnodetobedeleted->rightchild);
@@ -379,3 +379,53 @@ int delete1(struct node *root,int data)
     }
 
 }}
+
+
+//CASE TWO
+//DELETE NODES IN BINARY SEARCH TREE WHICH HAS ONE CHILDREN
+
+void deletenodewithonechildren(struct node *root,int data)
+{
+    struct node *parentnodeofnodetobedeleted,*node,*nodeleftchild,*noderightchild;
+    int checkstatus;
+    parentnodeofnodetobedelete=search(root,data);
+    checkstatus=check(root,data);
+    if(checkstatus==1)
+    {
+        printf("It is a leaf node");
+        return;
+    }
+    else if(checkstatus==0)
+    {
+        printf("Ist not a leaf node");
+
+        if(parentnodeofnodetobedeleted->leftchild && parentnodeofnodetobedeleted->rightchild!=NULL || parentnodeofnodetobedeleted!=NULL)
+        {
+               if (parentnodeofnodetobedeleted->leftchild==NULL)
+               {
+                  node=parentnodeofnodetobedeleted->rightchild;
+               }
+
+                else if(parentnodeofnodetobedeleted->rightchild==NULL)
+                {
+                    node=parentnodeofnodetobedeleted->leftchild;
+                }
+                  if(node->leftchild==NULL)
+                  {
+                     noderightchild=node->rightchild;
+                     parentnodeofnodetobedeleted->rightchild=noderightchild;
+                     free(node);
+                  }
+                  else if(node->rightchild==NULL)
+                  {
+                     nodeleftchild=node->leftchild;
+                     parentnodeofnodetobedeleted->leftchild=nodeleftchild;
+                    free(node);
+                  }
+         }
+
+        }
+
+    }
+
+}
