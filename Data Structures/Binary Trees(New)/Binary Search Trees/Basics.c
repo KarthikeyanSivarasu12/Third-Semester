@@ -422,10 +422,36 @@ void deletenodewithonechildren(struct node *root,int data)
                      parentnodeofnodetobedeleted->leftchild=nodeleftchild;
                     free(node);
                   }
+
          }
 
         }
 
     }
 
+}
+
+//CASE 3
+//DELETE NODES IN BINARY SEARCH TREE WHICH HAS TWO CHILDREN
+
+int *inordersuccessor(struct node *nodex)
+{
+    struct node *current;
+    current=nodex;
+
+    
+}
+
+
+
+//Restore function 
+void restore(int *tree,int index)
+{
+    int tempindex;
+    tempindex=index;
+    
+      if(tree[2*index+1]==-1)
+      {
+         tree[2*index+2]==
+      }
 }
