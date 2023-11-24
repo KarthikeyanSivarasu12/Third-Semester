@@ -76,7 +76,7 @@ struct node *search(struct node *rootnode,int datatosearch)
 
 
 
-int heightofnode(struct node *rootnode, int datainnode)
+int levelofnode(struct node *rootnode, int datainnode)
 {
     struct node *newlyinsertednode = search(rootnode, datainnode);
     if (newlyinsertednode  != NULL)
@@ -89,39 +89,110 @@ int heightofnode(struct node *rootnode, int datainnode)
         return -1; // Or any appropriate value indicating an error
     }
 }
-int heightofleftsubtreeofnode(struct node *rootnode,int dataofnode,int datainnewnode)
-{
-    struct node *newlyinsertednode,*requirednode;
+// int heightofleftsubtreeofnode(struct node *rootnode,int dataofnode,int datainnewnode)
+// {
+//     struct node *newlyinsertednode,*requirednode;
 
-    int heightofnewlyinsertednode,heightofrequirednode;
+//     int heightofnewlyinsertednode,heightofrequirednode;
 
-    newlyinsertednode=search(rootnode,datainnewnode);
-    heightofnewlyinsertednode=heightofnode(rootnode,datainnewnode);
+//     newlyinsertednode=search(rootnode,datainnewnode);
+//     heightofnewlyinsertednode=heightofnode(rootnode,datainnewnode);
 
-    requirednode=search(rootnode,dataofnode);
-    heightofrequirednode=heightofnode(rootnode,dataofnode);
-
-
-}
+//     requirednode=search(rootnode,dataofnode);
+//     heightofrequirednode=heightofnode(rootnode,dataofnode);
 
 
-int heightofleftsubtree(struct node *rootnode,int datainnode)
-{
-    struct node *requirednode;
-    requirednode=search(rootnode,datainnode);
-    while(requirednode!=NULL)
-    {
-        if(requirednode->leftchild!=NULL || requirednode->rightchild!=NULL)
-        {
-            if(requirednode->leftchild!=NULL)
-            {
-                requirednode=requirednode->leftchild;
-            }
-            else if(requirednode->rightchild!=NULL)
-            {
-                requirednode=requirednode->rightchild;
-            }
-        }
+// }
+
+
+// int heightofleftsubtree(struct node *rootnode,int datainnode)
+// {
+//     struct node *requirednode;
+//     requirednode=search(rootnode,datainnode);
+//     while(requirednode!=NULL)
+//     {
+//         if(requirednode->leftchild!=NULL || requirednode->rightchild!=NULL)
+//         {
+//             if(requirednode->leftchild!=NULL)
+//             {
+//                 requirednode=requirednode->leftchild;
+//             }
+//             else if(requirednode->rightchild!=NULL)
+//             {
+//                 requirednode=requirednode->rightchild;
+//             }
+//         }
+//     }
+// }
+
+int maxleftsubtreeheight(struct node* node) {
+    if (node == NULL) {
+        return 0;
+    } else {
+        // Calculate the height of the left subtree
+        int leftheight = maxleftsubtreeheight(node->leftchild);
+
+        // Return the height of the left subtree plus 1 for the current level
+        printf("Node %d: Left Height = %d\n", node->data, leftheight);
+        return leftheight + 1;
     }
 }
 
+int maxrightsubtreeheight(struct node* node) {
+    if (node == NULL) {
+        return 0;
+    } else {
+        // Calculate the height of the left subtree
+        int rightheight = maxrightsubtreeheight(node->rightchild);
+
+        // Return the height of the left subtree plus 1 for the current level
+        printf("Node %d: Right Height = %d\n", node->data, rightheight);
+        return rightheight + 1;
+    }
+}
+
+int balancefactorofnode(struct node *node)
+{
+     int leftsubtreeheight=maxleftsubtreeheight(node->leftchild);
+     int rightsubtreeheight=maxrightsubtreeheight(node->rightchild);
+     return (leftsubtreeheight-rightsubtreeheight);
+}
+
+
+// int max(int a, int b) {
+//     return (a > b) ? a : b;
+// }
+
+
+// int heightofnode(struct node *rootnode,int datainnode)
+// {
+//     struct node *requirednode;
+//     requirednode=search(rootnode,datainnode);
+
+//     if(requirednode==NULL)
+//     {
+//         return -1;
+//     }
+
+//     int leftheight=heightofnode(requirednode->leftchild,requirednode->data);
+//     int rightheight=heightofnode(requirednode->rightchild,requirednode->data);
+//     return max(leftheight,rightheight)+1;
+    
+// }
+
+struct node *LL(struct node *rootnode,datainserted)
+{
+    struct node *requirednode,*nodewithimbalance,*middlenode,*lastnode;
+    requirednode=search(rootnode,datainserted);
+    if(balancefactorofnode(rootnode)!=-1 && balancefactorofnode(rootnode)!=0 && balancefactorofnode(rootnode)!=1)
+    {
+        nodewithimbalance=requirednode;
+        middlenode=requirednode->leftchild;
+        lastnode=middlenode->leftchild;
+
+        middlenode->rightchild=nodewithimbalance;
+        middlenode->leftchild=lastnode;
+
+    }
+
+}
