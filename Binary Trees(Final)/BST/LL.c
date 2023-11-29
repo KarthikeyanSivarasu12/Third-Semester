@@ -97,32 +97,76 @@ struct node *insertinBST(struct node *rootnode,int datatoinsert)
 // }
 
 //DELETING NODE WITH ZERO/ONE/TWO CHILDREN
-struct node *deletenode(struct node *rootnode,int datatodelete)
+// struct node *deletenode(struct node *rootnode,int datatodelete)
+// {
+//     if(rootnode==NULL)
+//     {
+//         printf("Node not found in the tree or the tree is empty");
+//         return rootnode;
+//     }
+//     else if(datatodelete<(rootnode->data))
+//     {
+//         rootnode->leftchild=deletenode(rootnode->leftchild,datatodelete);
+//     }
+//     else if(datatodelete>(rootnode->data))
+//     {
+//         rootnode->rightchild=deletenode(rootnode->rightchild,datatodelete);
+//     }
+//     else if(rootnode->data==datatodelete)
+//     {
+//         //If the rootnode of the subtree or the rootnode itself has no leftchild
+//         if(rootnode->leftchild==NULL)
+//         {
+//                struct node *temp=rootnode->rightchild;
+//                free(rootnode);
+//                return temp;
+//         }
+//         else if()
+//     }
+// }
+
+
+//INORDER TRAVERSAL IN BST
+void inordertraversal(struct node *rootnode)
 {
-    if(rootnode==NULL)
+    
+    if(rootnode->leftchild!=NULL)
     {
-        printf("Node not found in the tree or the tree is empty");
-        return rootnode;
+        inordertraversal(rootnode->leftchild);
     }
-    else if(datatodelete<(rootnode->data))
+    printf("%d",rootnode->data);
+    if(rootnode->rightchild!=NULL)
     {
-        rootnode->leftchild=deletenode(rootnode->leftchild,datatodelete);
+        inordertraversal(rootnode->rightchild);
     }
-    else if(datatodelete>(rootnode->data))
+}
+
+//PREORDER TRAVERSAL IN BST
+void preordertraversal(struct node *rootnode)
+{
+    printf("%d",rootnode->data);
+    if(rootnode->leftchild!=NULL)
     {
-        rootnode->rightchild=deletenode(rootnode->rightchild,datatodelete);
+        preordertraversal(rootnode->leftchild);
     }
-    else if(rootnode->data==datatodelete)
+    if(rootnode->rightchild!=NULL)
     {
-        //If the rootnode of the subtree or the rootnode itself has no leftchild
-        if(rootnode->leftchild==NULL)
-        {
-               struct node *temp=rootnode->rightchild;
-               free(rootnode);
-               return temp;
-        }
-        else if()
+        preordertraversal(rootnode->rightchild);
     }
+}
+
+//POSTORDER TRAVERSAL IN BST
+void postordertraversal(struct node *rootnode)
+{
+    if(rootnode->leftchild!=NULL)
+    {
+        postordertraversal(rootnode->leftchild);
+    }
+    if(rootnode->rightchild!=NULL)
+    {
+        postordertraversal(rootnode->rightchild);
+    }
+    printf("%d",rootnode->data);
 }
 
 //PRINTING THE BST
@@ -157,11 +201,24 @@ int main(void)
     }
     // printf("The tree is:\n");
     // printTree(rootnode,0);
-    printf("Enter the data of node with zero children to be deleted:");
-    scanf("%d",&datatodelete);
-    deletenodewithzerochildren(&rootnode,datatodelete);
-    printf("The tree after deletion is:\n");
+
+    // TRAVERSAL IN BST
     printTree(rootnode,0);
+    printf("Result:");
+    inordertraversal(rootnode);
+    printf("\n");
+    printf("Result:");
+    preordertraversal(rootnode);
+    printf("\n");
+    printf("Result:");
+    postordertraversal(rootnode);
+    printf("\n");
+
+    // printf("Enter the data of node with zero children to be deleted:");
+    // scanf("%d",&datatodelete);
+    // deletenodewithzerochildren(&rootnode,datatodelete);
+    // printf("The tree after deletion is:\n");
+    // printTree(rootnode,0);
     return 0;
     
 }
