@@ -340,8 +340,37 @@ struct node *deleteNode(struct node *rootnode, int priority)
         return rootnode;
     }
 
-    return updateHeightAndRotate(rootnode);
+    // Update height and perform rotations
+    rootnode->height = heightofnode(rootnode);
+
+    int balance = balancefactorofnode(rootnode);
+
+    if (balance > 1)
+    {
+        if (balancefactorofnode(rootnode->leftchild) >= 0)
+        {
+            return LLoperation(rootnode);
+        }
+        else
+        {
+            return LRoperation(rootnode);
+        }
+    }
+    if (balance < -1)
+    {
+        if (balancefactorofnode(rootnode->rightchild) <= 0)
+        {
+            return RRoperation(rootnode);
+        }
+        else
+        {
+            return RLoperation(rootnode);
+        }
+    }
+
+    return rootnode;
 }
+
 
 void freeAVLTree(struct node *rootnode)
 {
