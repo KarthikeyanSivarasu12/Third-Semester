@@ -1,3 +1,5 @@
+
+#include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +15,16 @@ struct node
     struct node *rightchild;
 };
 
+// Structure to represent a user
+struct User
+{
+    char username[50];
+    char password[50];
+};
+
 int taskCounter = 1;
+int userCount = 0;
+struct User users[100]; // Assuming a maximum of 100 users
 
 // Function to create a new task node
 struct node *createTask(int priority, const char *description)
@@ -27,13 +38,72 @@ struct node *createTask(int priority, const char *description)
     return newNode;
 }
 
-// Function to find the maximum of two numbers
+// AVL tree functions...
+
+// GTK-specific variables
+GtkWidget *text_view;
+GtkWidget *username_entry;
+GtkWidget *password_entry;
+GtkWidget *description_entry;
+GtkWidget *priority_entry;
+struct node *rootnode = NULL; // AVL tree root
+
+void print_to_text_view(const char *text)
+{
+    GtkTextBuffer *buffer;
+    GtkTextIter iter;
+
+    buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
+    gtk_text_buffer_get_end_iter(buffer, &iter);
+    gtk_text_buffer_insert(buffer, &iter, text, -1);
+}
+
+void register_button_clicked(GtkWidget *widget, gpointer data)
+{
+    printf("Enter a username: ");
+    scanf("%s", users[userCount].username);
+
+    printf("Enter a password: ");
+    scanf("%s", users[userCount].password);
+
+    userCount++;
+    printf("User registered successfully!\n");
+    print_to_text_view("User registered successfully!\n");
+}
+
+int authenticateUser(const char *username, const char *password)
+{
+    for (int i = 0; i < userCount; ++i)
+    {
+        if (strcmp(users[i].username, username) == 0 && strcmp(users[i].password, password) == 0)
+        {
+            return 1; // Authentication successful
+        }
+    }
+    return 0; // Authentication failed
+}
+
+void login_button_clicked(GtkWidget *widget, gpointer data)
+{
+    const char *username = gtk_entry_get_text(GTK_ENTRY(username_entry));
+    const char *password = gtk_entry_get_text(GTK_ENTRY(password_entry));
+
+    if (authenticateUser(username, password))
+    {
+        print_to_text_view("Login successful!\n");
+        // Continue to task management functionalities
+    }
+    else
+    {
+        print_to_text_view("Login failed. Invalid username or password.\n");
+    }
+}
+
 int max(int a, int b)
 {
     return (a > b) ? a : b;
 }
 
-// Function to calculate the height of a node
 int heightofnode(struct node *node)
 {
     if (node == NULL)
@@ -48,7 +118,6 @@ int heightofnode(struct node *node)
     return max(leftheight, rightheight) + 1;
 }
 
-// Function to calculate the balance factor of a node
 int balancefactorofnode(struct node *requirednode)
 {
     if (requirednode == NULL || (requirednode->leftchild == NULL && requirednode->rightchild == NULL))
@@ -64,70 +133,52 @@ int balancefactorofnode(struct node *requirednode)
     }
 }
 
-// Function to perform LL rotation
 struct node *LLoperation(struct node *ancestor)
 {
     if (ancestor == NULL || ancestor->leftchild == NULL)
     {
-        // Invalid input or LL operation not applicable
         return ancestor;
     }
 
-    struct node *child, *lstofchild, *rstofchild, *rstofancestor;
-    struct node *temp;
+    struct node *child, *temp;
     child = ancestor->leftchild;
 
-    lstofchild = child->leftchild;
-    rstofchild = child->rightchild;
-    rstofancestor = ancestor->rightchild;
-
-    temp = lstofchild;
+    temp = child->leftchild;
     child->rightchild = ancestor;
     child->rightchild->leftchild = temp;
-    child->rightchild->rightchild = rstofancestor;
+    child->rightchild->rightchild = ancestor->rightchild;
 
-    // Update heights
     ancestor->height = heightofnode(ancestor);
     child->height = heightofnode(child);
 
     return child;
 }
 
-// Function to perform RR rotation
 struct node *RRoperation(struct node *ancestor)
 {
     if (ancestor == NULL || ancestor->rightchild == NULL)
     {
-        // Invalid input or RR operation not applicable
         return ancestor;
     }
 
-    struct node *child, *lstofchild, *rstofchild, *lstofancestor;
-    struct node *temp;
+    struct node *child, *temp;
     child = ancestor->rightchild;
 
-    lstofchild = child->leftchild;
-    rstofchild = child->rightchild;
-    lstofancestor = ancestor->leftchild;
-
-    temp = rstofchild;
+    temp = child->leftchild;
     child->leftchild = ancestor;
     child->leftchild->rightchild = temp;
-    child->leftchild->leftchild = lstofancestor;
+    child->leftchild->leftchild = ancestor->leftchild;
 
-    // Update heights
     ancestor->height = heightofnode(ancestor);
     child->height = heightofnode(child);
 
     return child;
 }
 
-// Function to perform RL rotation
 struct node *RLoperation(struct node *ancestor)
 {
     if (ancestor == NULL || ancestor->leftchild == NULL)
     {
-        // Invalid input or RL operation not applicable
         return ancestor;
     }
 
@@ -135,12 +186,10 @@ struct node *RLoperation(struct node *ancestor)
     return LLoperation(ancestor);
 }
 
-// Function to perform LR rotation
 struct node *LRoperation(struct node *ancestor)
 {
     if (ancestor == NULL || ancestor->rightchild == NULL)
     {
-        // Invalid input or LR operation not applicable
         return ancestor;
     }
 
@@ -148,7 +197,6 @@ struct node *LRoperation(struct node *ancestor)
     return RRoperation(ancestor);
 }
 
-// Function to find the node with the minimum value in a tree
 struct node *minValueNode(struct node *node)
 {
     struct node *current = node;
@@ -159,7 +207,6 @@ struct node *minValueNode(struct node *node)
     return current;
 }
 
-// Function to update the height and perform rotations if needed
 struct node *updateHeightAndRotate(struct node *rootnode)
 {
     if (rootnode == NULL)
@@ -167,23 +214,18 @@ struct node *updateHeightAndRotate(struct node *rootnode)
         return rootnode;
     }
 
-    // Update height of the current node
     rootnode->height = heightofnode(rootnode);
 
-    // Check balance factor
     int balance = balancefactorofnode(rootnode);
 
-    // Perform rotations if needed
     if (balance > 1)
     {
         if (balancefactorofnode(rootnode->leftchild) >= 0)
         {
-            // LL case
             return LLoperation(rootnode);
         }
         else
         {
-            // LR case
             return LRoperation(rootnode);
         }
     }
@@ -191,12 +233,10 @@ struct node *updateHeightAndRotate(struct node *rootnode)
     {
         if (balancefactorofnode(rootnode->rightchild) <= 0)
         {
-            // RR case
             return RRoperation(rootnode);
         }
         else
         {
-            // RL case
             return RLoperation(rootnode);
         }
     }
@@ -204,7 +244,6 @@ struct node *updateHeightAndRotate(struct node *rootnode)
     return rootnode;
 }
 
-// Function to insert a task into the AVL Tree
 struct node *insertTask(struct node *rootnode, int priority, const char *description)
 {
     if (rootnode == NULL)
@@ -214,26 +253,24 @@ struct node *insertTask(struct node *rootnode, int priority, const char *descrip
 
     if (priority < rootnode->priority || (priority == rootnode->priority && taskCounter % 2 == 0))
     {
-        // Insert into the left subtree
         rootnode->leftchild = insertTask(rootnode->leftchild, priority, description);
     }
     else
     {
-        // Insert into the right subtree
         rootnode->rightchild = insertTask(rootnode->rightchild, priority, description);
     }
 
-    // Update height and perform rotations
     return updateHeightAndRotate(rootnode);
 }
 
-// Function to print the tree in-order based on priority
 void printInOrder(struct node *rootnode)
 {
     if (rootnode != NULL)
     {
         printInOrder(rootnode->leftchild);
-        printf("Task ID: %d, Priority: %d, Description: %s\n", rootnode->task_id, rootnode->priority, rootnode->description);
+        char buffer[1000];
+        sprintf(buffer, "Task ID: %d, Priority: %d, Description: %s\n", rootnode->task_id, rootnode->priority, rootnode->description);
+        print_to_text_view(buffer);
         printInOrder(rootnode->rightchild);
     }
 }
@@ -242,23 +279,19 @@ void printAsTree(struct node *root, int level)
 {
     if (root != NULL)
     {
-        // Increase the spacing based on the level
         for (int i = 0; i < level; i++)
         {
-            printf("    ");
+            print_to_text_view("    ");
         }
+        char buffer[1000];
+        sprintf(buffer, "|--[%d, %d, %s]\n", root->task_id, root->priority, root->description);
+        print_to_text_view(buffer);
 
-        // Print current node with details
-        printf("|--[%d, %d, %s]\n", root->task_id, root->priority, root->description);
-
-        // Recursive call for right and left subtrees
         printAsTree(root->rightchild, level + 1);
         printAsTree(root->leftchild, level + 1);
     }
 }
 
-
-// Function to delete a node in binary search tree based on priority
 struct node *deleteNode(struct node *rootnode, int priority)
 {
     if (rootnode == NULL)
@@ -268,62 +301,48 @@ struct node *deleteNode(struct node *rootnode, int priority)
 
     if (priority < rootnode->priority || (priority == rootnode->priority && taskCounter % 2 == 0))
     {
-        // Node to be deleted is in the left subtree
         rootnode->leftchild = deleteNode(rootnode->leftchild, priority);
     }
     else if (priority > rootnode->priority || (priority == rootnode->priority && taskCounter % 2 != 0))
     {
-        // Node to be deleted is in the right subtree
         rootnode->rightchild = deleteNode(rootnode->rightchild, priority);
     }
     else
     {
-        // Node with the priority found
-
-        // Node with only one child or no child
         if (rootnode->leftchild == NULL || rootnode->rightchild == NULL)
         {
             struct node *temp = rootnode->leftchild ? rootnode->leftchild : rootnode->rightchild;
 
-            // No child case
             if (temp == NULL)
             {
                 temp = rootnode;
                 rootnode = NULL;
             }
-            else // One child case
+            else
             {
-                *rootnode = *temp; // Copy the contents of the non-empty child
+                *rootnode = *temp;
             }
 
             free(temp);
         }
         else
         {
-            // Node with two children: Get the inorder successor (smallest in the right subtree)
             struct node *temp = minValueNode(rootnode->rightchild);
-
-            // Copy the inorder successor's data to this node
             rootnode->task_id = temp->task_id;
             rootnode->priority = temp->priority;
             strcpy(rootnode->description, temp->description);
-
-            // Delete the inorder successor
             rootnode->rightchild = deleteNode(rootnode->rightchild, temp->priority);
         }
     }
 
-    // If the tree had only one node, then return
     if (rootnode == NULL)
     {
         return rootnode;
     }
 
-    // Update height and perform rotations
     return updateHeightAndRotate(rootnode);
 }
 
-// Function to free the memory of the AVL Tree
 void freeAVLTree(struct node *rootnode)
 {
     if (rootnode != NULL)
@@ -334,70 +353,147 @@ void freeAVLTree(struct node *rootnode)
     }
 }
 
-
-int main(void)
+void add_task_button_clicked(GtkWidget *widget, gpointer data)
 {
-    struct node *rootnode = NULL;
-    int choice;
-    char description[100];
-    int priority;
+    const char *description = gtk_entry_get_text(GTK_ENTRY(description_entry));
+    int priority = atoi(gtk_entry_get_text(GTK_ENTRY(priority_entry)));
 
-    do
+    if (userCount > 0)
     {
-        printf("\n1. Add Task\n");
-        printf("2. View Tasks\n");
-        printf("3. Delete Task\n");
-        printf("4. Print Task Tree\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
-        {
-        case 1:
-            printf("Enter task description: ");
-            scanf(" %[^\n]s", description);
-            printf("Enter priority (1 to 5, where 1 is the least priority and 5 is the highest priority): ");
-            scanf("%d", &priority);
-            rootnode = insertTask(rootnode, priority, description);
-            printf("Task added successfully!\n");
-            break;
-                 // Function to print the tree in-order based on priority
-        case 2:
-            printf("\n--- Tasks ---\n");
-            printInOrder(rootnode);
-            break;
-
-        case 3:
-            printf("Enter the priority to delete: ");
-            scanf("%d", &priority);
-            rootnode = deleteNode(rootnode, priority);
-            printf("Task deleted successfully!\n");
-            break;
-
-        case 4:
-            printf("\n--- Task Tree ---\n");
-            if (rootnode != NULL)
-            {
-                printAsTree(rootnode, 0);
-            }
-            else
-            {
-                printf("No tasks available.\n");
-            }
-            break;
-
-        case 5:
-            // Free the memory before exiting
-            freeAVLTree(rootnode);
-            printf("Exiting the program. Memory freed.\n");
-            break;
-
-        default:
-            printf("Invalid choice! Please enter a valid option.\n");
-        }
-
-    } while (choice != 5);
-
-    return 0;
+        rootnode = insertTask(rootnode, priority, description);
+        print_to_text_view("Task added successfully!\n");
+    }
+    else
+    {
+        print_to_text_view("Please log in first.\n");
+    }
 }
+
+void view_tasks_button_clicked(GtkWidget *widget, gpointer data)
+{
+    char buffer[1000] = "\n--- Tasks ---\n";
+    sprintf(buffer, "\n--- Tasks ---\n");
+    print_to_text_view(buffer);
+    FILE *stream;
+    stream = fopen("output.txt", "w");
+    fprintf(stream, "\n--- Tasks ---\n");
+    fclose(stream);
+    printInOrder(rootnode);
+}
+
+void delete_task_button_clicked(GtkWidget *widget, gpointer data)
+{
+    int priority = atoi(gtk_entry_get_text(GTK_ENTRY(priority_entry)));
+    rootnode = deleteNode(rootnode, priority);
+    print_to_text_view("Task deleted successfully!\n");
+}
+
+void print_tree_button_clicked(GtkWidget *widget, gpointer data)
+{
+    print_to_text_view("\n--- Task Tree ---\n");
+    if (rootnode != NULL)
+    {
+        printAsTree(rootnode, 0);
+    }
+    else
+    {
+        print_to_text_view("No tasks available.\n");
+    }
+}
+
+void exit_button_clicked(GtkWidget *widget, gpointer data)
+{
+    freeAVLTree(rootnode);
+    print_to_text_view("Exiting the program. Memory freed.\n");
+    gtk_main_quit();
+}
+
+int main(int argc, char *argv[])
+{
+    // GTK Initialization
+    gtk_init(&argc, &argv);
+
+    // Create the main window
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "Task Manager");
+    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
+    gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+    // Create a vertical box to hold the UI elements
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+
+    // Create an entry for username
+    username_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(username_entry), "Username");
+    gtk_box_pack_start(GTK_BOX(vbox), username_entry, FALSE, FALSE, 0);
+
+    // Create an entry for password
+    password_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(password_entry), "Password");
+    gtk_entry_set_visibility(GTK_ENTRY(password_entry), FALSE);
+    gtk_box_pack_start(GTK_BOX(vbox), password_entry, FALSE, FALSE, 0);
+
+    // Create a button to register
+    GtkWidget *register_button = gtk_button_new_with_label("Register");
+    g_signal_connect(register_button, "clicked", G_CALLBACK(register_button_clicked), NULL);
+    gtk_box_pack_start(GTK_BOX(vbox), register_button, FALSE, FALSE, 0);
+
+    // Create a button to login
+    GtkWidget *login_button = gtk_button_new_with_label("Login");
+    g_signal_connect(login_button, "clicked", G_CALLBACK(login_button_clicked), NULL);
+    gtk_box_pack_start(GTK_BOX(vbox), login_button, FALSE, FALSE, 0);
+
+    // Create a text view to display messages
+    text_view = gtk_text_view_new();
+    gtk_text_view_set_editable(GTK_TEXT_VIEW(text_view), FALSE);
+    gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(text_view), FALSE);
+    gtk_box_pack_start(GTK_BOX(vbox), text_view, TRUE, TRUE, 0);
+
+    // Create an entry for task description
+    description_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(description_entry), "Task Description");
+    gtk_box_pack_start(GTK_BOX(vbox), description_entry, FALSE, FALSE, 0);
+
+    // Create an entry for task priority
+    priority_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(priority_entry), "Task Priority");
+    gtk_box_pack_start(GTK_BOX(vbox), priority_entry, FALSE, FALSE, 0);
+
+    // Create a button to add a task
+    GtkWidget *add_task_button = gtk_button_new_with_label("Add Task");
+    g_signal_connect(add_task_button, "clicked", G_CALLBACK(add_task_button_clicked), NULL);
+    gtk_box_pack_start(GTK_BOX(vbox),add_task_button, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), add_task_button, FALSE, FALSE, 0);
+
+// Create a button to view tasks
+GtkWidget *view_tasks_button = gtk_button_new_with_label("View Tasks");
+g_signal_connect(view_tasks_button, "clicked", G_CALLBACK(view_tasks_button_clicked), NULL);
+gtk_box_pack_start(GTK_BOX(vbox), view_tasks_button, FALSE, FALSE, 0);
+
+// Create a button to delete a task
+GtkWidget *delete_task_button = gtk_button_new_with_label("Delete Task");
+g_signal_connect(delete_task_button, "clicked", G_CALLBACK(delete_task_button_clicked), NULL);
+gtk_box_pack_start(GTK_BOX(vbox), delete_task_button, FALSE, FALSE, 0);
+
+// Create a button to print the tree
+GtkWidget *print_tree_button = gtk_button_new_with_label("Print Tree");
+g_signal_connect(print_tree_button, "clicked", G_CALLBACK(print_tree_button_clicked), NULL);
+gtk_box_pack_start(GTK_BOX(vbox), print_tree_button, FALSE, FALSE, 0);
+
+// Create a button to exit
+GtkWidget *exit_button = gtk_button_new_with_label("Exit");
+g_signal_connect(exit_button, "clicked", G_CALLBACK(exit_button_clicked), NULL);
+gtk_box_pack_start(GTK_BOX(vbox), exit_button, FALSE, FALSE, 0);
+
+// Show all widgets
+gtk_widget_show_all(window);
+
+// Run the GTK main loop
+gtk_main();
+
+return 0;
+}
+
+
